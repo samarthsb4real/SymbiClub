@@ -1,13 +1,18 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export default authMiddleware({
-  // An array of public routes that don't require authentication.
-  publicRoutes: ["/api/webhook/clerk"],
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)']);
 
-  // An array of routes to be ignored by the authentication middleware.
-  ignoredRoutes: ["/api/webhook/clerk"],
-});
+
+export default clerkMiddleware((auth, request) => {
+
+  PublicRoutes: ['/','/api/webhook/clerk']
+  ignoredRoutes: ['/api/webhook/clerk']
+  
+  if(!isPublicRoute(request)) {
+    auth().protect();
+  }
+}, { debug: true });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next/static|favicon.ico).*)"],
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 };
