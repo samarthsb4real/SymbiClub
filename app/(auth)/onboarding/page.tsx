@@ -1,6 +1,9 @@
 import AccountProfile from "@/components/forms/AccountProfile";
 import { currentUser } from "@clerk/nextjs/server";
 
+
+// 1:37:39 / 5:50:3
+
 async function Page() {
     const user = await currentUser();
 
