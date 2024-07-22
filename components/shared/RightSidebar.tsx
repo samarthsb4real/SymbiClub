@@ -1,5 +1,9 @@
-export default function RightSidebar(){
+export default function RightSidebar() {
     return (
-        <h1>RightSidebar</h1>
+        <section className="custom-scrollbar rightsidebar">
+            <div className="flex flex-1 flex-col justify-start">
+                <h3 className="text-white">Clubs to Join</h3>
+            </div>
+        </section>
     )
 }
