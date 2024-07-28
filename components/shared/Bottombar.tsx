@@ -30,7 +30,8 @@ export default function Bottombar() {
                     )
                 }
                 )
-                }            </div>
+                }
+            </div>
         </section>
     )
 }

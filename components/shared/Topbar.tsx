@@ -4,7 +4,7 @@ import Link from "next/link";
 import { dark } from "@clerk/themes";
 export default function Topbar() {
     return (
-        <nav className="topbar">
+        <nav className="topbar shadow-emerald-50">
             <Link href="/" className="flex items-center gap-4">
                 <Image src="/favicon.ico" alt="logo" className="rounded-full" width={28} height={28} />
                 <p className="text-heading3-bold text-light-1 max-xs:hidden">SymbiClub</p>

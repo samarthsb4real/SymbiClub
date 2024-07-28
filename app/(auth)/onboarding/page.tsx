@@ -25,8 +25,8 @@ async function Page() {
 
             <section className="mt-9 bg-dark-2 p-10 rounded-2xl ">
                 <AccountProfile
-                user={userData}
-                btnTitle="Continue" />
+                    user={userData}
+                    btnTitle="Continue" />
 
             </section>
         </main>
