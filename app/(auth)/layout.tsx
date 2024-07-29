@@ -8,7 +8,7 @@ import Bottombar from "@/components/shared/Bottombar";
 
 export const metadata = {
   title: 'SymbiClub',
-  description: 'A application designed for effective management of campus club activities'
+  description: 'An Application designed for effective management of Campus Club Activities'
 }
 
 const inter = Inter({ subsets: ["latin"] })
