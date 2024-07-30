@@ -25,17 +25,17 @@ export async function updateUser({
 
   try {
     await User.findOneAndUpdate(
-      {
-        id: userId,
-      },
+      { id: userId },
       { username: username.toLowerCase(), name, bio, image, onboarded: true },
       { upsert: true }
     );
 
-    if (path === "/profile/edit") {
+    if (path === '/profile/edit') {
       revalidatePath(path);
     }
+
   } catch (error: any) {
+    console.error("Failed to create/update user:", error);
     throw new Error(`Failed to create/update user: ${error.message}`);
   }
 }
