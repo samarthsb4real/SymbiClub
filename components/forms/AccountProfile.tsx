@@ -43,7 +43,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     const router = useRouter();
     const pathname = usePathname();
 
-
     const form = useForm({
         resolver: zodResolver(UserValidation),
         defaultValues: {
