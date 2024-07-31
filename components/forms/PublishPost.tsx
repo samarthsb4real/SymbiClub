@@ -19,6 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { usePathname, useRouter } from 'next/navigation';
 import { PostValidation, CommentValidation } from "@/lib/validations/post";
+import { createPost } from "@/lib/actions/post.actions";
 
 // import { updateUser } from '@/lib/actions/user.actions';
 // import { UserValidation } from '@/lib/validations/user';
@@ -50,9 +51,10 @@ function PublishPost({ userId }: { userId: string }) {
         }
     })
 
-    const onSubmit = async () => {
+    const onSubmit = async (values: z.infer<typeof PostValidation>) => {
 
-        // await createPost() 
+        await createPost({ text: values.post, author: userId, communityId: null, path: pathname })
+        router.push("/");
 
     }
 
@@ -84,7 +86,7 @@ function PublishPost({ userId }: { userId: string }) {
                 />
 
                 <Button type="submit" className="bg-red-500">
-                    Post 
+                    Post
                 </Button>
 
             </form>
