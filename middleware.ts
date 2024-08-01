@@ -1,17 +1,18 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)']);
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/', '/api/webhook/clerk']);
 
-
-export default clerkMiddleware((auth, request) => {
-
-  PublicRoutes: ['/','/api/webhook/clerk']
-  ignoredRoutes: ['/api/webhook/clerk']
-  
-  if(!isPublicRoute(request)) {
-    auth().protect();
+const middleware = clerkMiddleware((auth, req, evt) => {
+  console.log(`Request URL: ${req.url}`);
+  if (isPublicRoute(req)) {
+    console.log('Public route, no auth required.');
+    return; // Allow public access
   }
-}, { debug: true });
+  console.log('Protected route, auth required.');
+  auth().protect();
+});
+
+export default middleware;
 
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
