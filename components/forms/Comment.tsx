@@ -57,7 +57,6 @@ const Comment = ({ postId, currentUserImg, currentUserId }: Props) => {
 
     return (
         <div>
-            <h1 className="text-white">Comment Form</h1>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

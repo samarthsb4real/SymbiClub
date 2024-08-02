@@ -9,6 +9,7 @@ interface Props {
 }
 
 // https://youtu.be/O5cmLDVTgAs?feature=shared&t=14981
+
 const PostsTab = async ({
     currentUserId,
     accountId,
@@ -16,7 +17,9 @@ const PostsTab = async ({
 
     let result = await fetchUserPosts(accountId);
 
-    if (!result) redirect('/')
+    if (!result) {
+        redirect('/');
+    }
 
     return (
         <section className="mt-10 flex flex-col gap-10">
@@ -28,9 +31,10 @@ const PostsTab = async ({
                     currentUserId={currentUserId}
                     parentId={post.parentId}
                     content={post.text}
-                    author={
-                        accountType === 'User'
-                            ? { name: result.name, image: result.image, id: result.id } : { name: post.author.name, image: post.author.image, id: post.author.id }} //todo
+                    author={accountType === 'User'
+                        ? { name: result.name, image: result.image, id: result.id }
+                        : { name: post.author.name, image: post.author.image, id: post.author.id }
+                    } 
                     community={post.community} //todo 
                     createdAt={post.createdAt}
                     comments={post.children} />

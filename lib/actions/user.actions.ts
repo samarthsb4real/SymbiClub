@@ -59,16 +59,19 @@ export async function fetchUserPosts(userId: string) {
     const posts = await User.findOne({ id: userId }).populate({
       path: "posts",
       model: Post,
-      populate: {
-        path: "children",
-        model: Post,
-        populate: {
-          path: "author",
-          model: User,
-          select: "name image id",
+      populate: [
+        {
+          path: "children",
+          model: Post,
+          populate: {
+            path: "author",
+            model: User,
+            select: "name image id",
+          },
         },
-      },
+      ],
     });
+    return posts;
   } catch (error: any) {
     throw new Error(`Error fetching posts: ${error.message}`);
   }

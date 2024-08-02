@@ -42,18 +42,18 @@ async function Page({ params }: { params: { id: string } }) {
 
                                 {tab.label === "Posts" && (
                                     <p className='ml-1 rounded-sm bg-light-4 px-2 py-1 text-tiny-medium text-light-2'>
-                                        {userInfo.threads.length}
+                                        {userInfo?.posts?.length}
                                     </p>
                                 )}
                             </TabsTrigger>
                         ))}
                     </TabsList>
-                    {profileTabs.map((tab)=> (
+                    {profileTabs.map((tab) => (
                         <TabsContent key={`content-${tab.label}`} value={tab.value} className="w-full text-light-1">
                             <PostsTab
                                 currentUserId={user.id}
                                 accountId={userInfo.id}
-                                accountType="User"/>
+                                accountType="User" />
                         </TabsContent>
                     ))}
                 </Tabs>
