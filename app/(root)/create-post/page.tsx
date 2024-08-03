@@ -19,5 +19,4 @@ async function Page() {
 }
 
 
-// https://youtu.be/O5cmLDVTgAs?feature=shared
 export default Page;

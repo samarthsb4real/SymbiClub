@@ -32,7 +32,6 @@ export async function createPost({ text, author, communityId, path }: Params) {
     throw new Error(`Error creating thread: ${error.message}`);
   }
 
-  //Update user Model, 2:44:20 / 5:50:34, https://youtu.be/O5cmLDVTgAs?feature=shared&t=9860
 }
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
@@ -131,7 +130,6 @@ export async function addCommentToPost(
 
     revalidatePath(path);
 
-    //https://youtu.be/O5cmLDVTgAs?feature=shared&t=13253
 
   } catch (error: any) {
     throw new Error(`Error fetching reply: ${error.message}`)
