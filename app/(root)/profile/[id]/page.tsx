@@ -1,10 +1,10 @@
 import PostsTab from "@/components/shared/PostsTab";
 import ProfileHeader from "@/components/shared/ProfileHeader";
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
+import { Tabs, TabsTrigger, TabsContent, TabsList } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
-import { TabsTrigger } from "@radix-ui/react-tabs";
+ 
 import Image from "next/image";
 import { redirect } from "next/navigation";
 

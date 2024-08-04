@@ -5,7 +5,7 @@ import ProfileHeader from "@/components/shared/ProfileHeader";
 import { profileTabs } from "@/constants";
 import { fetchUser, fetchUserPosts, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
-import { TabsTrigger } from "@radix-ui/react-tabs";
+import { TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
