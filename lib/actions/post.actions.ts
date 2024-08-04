@@ -29,7 +29,7 @@ export async function createPost({ text, author, communityId, path }: Params) {
 
     revalidatePath(path);
   } catch (error: any) {
-    throw new Error(`Error creating thread: ${error.message}`);
+    throw new Error(`Error creating post: ${error.message}`);
   }
 
 }
