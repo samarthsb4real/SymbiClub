@@ -8,7 +8,6 @@ interface Props {
     accountType: string;
 }
 
-// https://youtu.be/O5cmLDVTgAs?feature=shared&t=14981
 
 const PostsTab = async ({
     currentUserId,
