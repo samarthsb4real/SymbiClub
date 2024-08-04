@@ -2,6 +2,7 @@ import { OrganizationSwitcher, SignedIn, SignOutButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { dark } from "@clerk/themes";
+
 export default function Topbar() {
     return (
         <nav className="topbar shadow-2xl">
@@ -33,7 +34,6 @@ export default function Topbar() {
                         }
                     }}
                 />
-
             </div>
         </nav>
     )
