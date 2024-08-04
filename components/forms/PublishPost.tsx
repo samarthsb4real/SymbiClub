@@ -15,7 +15,7 @@ import {
 import { Textarea } from '../ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod'
 
-
+import { useOrganization } from "@clerk/nextjs";
 
 import { usePathname, useRouter } from 'next/navigation';
 import { PostValidation, CommentValidation } from "@/lib/validations/post";
@@ -42,6 +42,7 @@ function PublishPost({ userId }: { userId: string }) {
 
     const router = useRouter();
     const pathname = usePathname();
+    const { organization } = useOrganization()
 
     const form = useForm({
         resolver: zodResolver(PostValidation),
@@ -53,9 +54,15 @@ function PublishPost({ userId }: { userId: string }) {
 
     const onSubmit = async (values: z.infer<typeof PostValidation>) => {
 
-        await createPost({ text: values.post, author: userId, communityId: null, path: pathname })
-        router.push("/");
+        console.log('Org ID:', organization)
+        await createPost({
+            text: values.post,
+            author: userId,
+            communityId: organization ? organization.id : null,
+            path: pathname
+        });
 
+        router.push("/");
     }
 
     return (
