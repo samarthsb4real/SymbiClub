@@ -3,9 +3,6 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-
-// 1:37:39 / 5:50:3
-
 async function Page() {
     const user = await currentUser();
     if (!user) return null;
@@ -25,13 +22,12 @@ async function Page() {
     return (
         <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-10">
             <h1 className="head-text">Onboarding</h1>
-            <p className="mt-3 text-base-regular text-light-2"> Complete your profile now to use SymbiClub</p>
+            <p className="mt-3 text-base-regular text-light-2">Complete your profile now to use SymbiClub</p>
 
             <section className="mt-9 bg-dark-2 p-10 rounded-2xl ">
                 <AccountProfile
                     user={userData}
                     btnTitle="Continue" />
-
             </section>
         </main>
     )

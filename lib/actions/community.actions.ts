@@ -282,6 +282,7 @@ export async function deleteCommunity(communityId: string) {
       throw new Error("Community not found");
     }
 
+    // Delete all posts associated with the community
     await Post.deleteMany({ community: communityId });
 
     // Find all users who are part of the community
