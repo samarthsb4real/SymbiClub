@@ -30,7 +30,7 @@ async function RightSidebar() {
                     Suggested Clubs
                 </h3>
 
-                <div className='mt-7 flex w-full flex-col gap-8'>
+                <div className='mt-7 flex w-full flex-col gap-8 shadow-2xl'>
                     {result.communities.length === 0 ? (
                         <p className="no-result">No Communities</p>
                     ) : (<>
