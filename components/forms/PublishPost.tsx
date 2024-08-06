@@ -1,107 +1,82 @@
-"use client"
+"use client";
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Textarea } from '../ui/textarea';
-import { zodResolver } from '@hookform/resolvers/zod'
-
 import { useOrganization } from "@clerk/nextjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname, useRouter } from "next/navigation";
 
-import { usePathname, useRouter } from 'next/navigation';
-import { PostValidation, CommentValidation } from "@/lib/validations/post";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+
+import { PostValidation } from "@/lib/validations/post";
 import { createPost } from "@/lib/actions/post.actions";
 
-// import { updateUser } from '@/lib/actions/user.actions';
-// import { UserValidation } from '@/lib/validations/user';
-
 interface Props {
-    user: {
-        id: string;
-        objectId: string;
-        username: string;
-        name: string;
-        bio: string;
-        image: string;
-    };
-    btnTitle: string;
+  userId: string;
 }
 
+function PublishPost({ userId }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
 
+  const { organization } = useOrganization();
 
-function PublishPost({ userId }: { userId: string }) {
+  const form = useForm<z.infer<typeof PostValidation>>({
+    resolver: zodResolver(PostValidation),
+    defaultValues: {
+      post: "",
+      accountId: userId,
+    },
+  });
 
-    const router = useRouter();
-    const pathname = usePathname();
-    const { organization } = useOrganization()
+  const onSubmit = async (values: z.infer<typeof PostValidation>) => {
+    await createPost({
+      text: values.post,
+      author: userId,
+      communityId: organization ? organization.id : null,
+      path: pathname,
+    });
 
-    const form = useForm({
-        resolver: zodResolver(PostValidation),
-        defaultValues: {
-            post: '',
-            accountId: userId,
-        }
-    })
+    router.push("/");
+  };
 
-    const onSubmit = async (values: z.infer<typeof PostValidation>) => {
+  return (
+    <Form {...form}>
+      <form
+        className='mt-10 flex flex-col justify-start gap-10'
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name='post'
+          render={({ field }) => (
+            <FormItem className='flex w-full flex-col gap-3'>
+              <FormLabel className='text-base-semibold text-light-2'>
+                Content
+              </FormLabel>
+              <FormControl className='no-focus border border-dark-4 bg-dark-3 text-light-1'>
+                <Textarea rows={15} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        console.log('Org ID:', organization)
-        await createPost({
-            text: values.post,
-            author: userId,
-            communityId: organization ? organization.id : null,
-            path: pathname
-        });
-
-        router.push("/");
-    }
-
-    return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="mt-12 flex flex-col justify-start gap-10">
-
-                <FormField
-                    control={form.control}
-                    name="post"
-                    render={({ field }) => (
-                        <FormItem className='flex flex-col w-full gap-1'>
-                            <FormLabel className='text-base-semibold text-light-2'>
-                                Content
-                            </FormLabel>
-                            <FormControl className='no-focus border border-dark-4 bg-dark-3 text-light-1'
-                            >
-                                <Textarea
-                                    rows={10}
-                                    {...field}
-                                />
-
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <Button type="submit" className="bg-red-500">
-                    Post
-                </Button>
-
-            </form>
-
-        </Form>
-
-    )
-
+        <Button type='submit' className='bg-primary-500'>
+          Post Post
+        </Button>
+      </form>
+    </Form>
+  );
 }
 
 export default PublishPost;
