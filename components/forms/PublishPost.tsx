@@ -72,7 +72,7 @@ function PublishPost({ userId }: Props) {
         />
 
         <Button type='submit' className='bg-primary-500'>
-          Post Post
+           Publish
         </Button>
       </form>
     </Form>
