@@ -8,7 +8,6 @@ import { useUploadThing } from "@/lib/uploadthing";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
