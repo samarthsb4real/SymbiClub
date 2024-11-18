@@ -16,7 +16,7 @@ SymbiClub is a modern, feature-rich platform built using **Next.js**, **Clerk** 
 ### 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/yourusername/symbiclub.git
+git clone https://github.com/samarthsb4real/symbiclub.git
 cd symbiclub
 ``` 
 
